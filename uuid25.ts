@@ -33,19 +33,19 @@ const newParseError = () => new SyntaxError("could not parse a UUID string");
  * console.assert(b.toBytes().every((x) => x === 0xff));
  *
  * // convert from/to other popular textual representations
- * const d = [
+ * const c = [
  *   Uuid25.parse("e7a1d63b711744238988afcf12161878"),
  *   Uuid25.parse("e7a1d63b-7117-4423-8988-afcf12161878"),
  *   Uuid25.parse("{e7a1d63b-7117-4423-8988-afcf12161878}"),
  *   Uuid25.parse("urn:uuid:e7a1d63b-7117-4423-8988-afcf12161878"),
  * ];
- * console.assert(d.every((x) => x.value === "dpoadk8izg9y4tte7vy1xt94o"));
+ * console.assert(c.every((x) => x.value === "dpoadk8izg9y4tte7vy1xt94o"));
  *
- * const e = Uuid25.parse("dpoadk8izg9y4tte7vy1xt94o");
- * console.assert(e.toHex() === "e7a1d63b711744238988afcf12161878");
- * console.assert(e.toHyphenated() === "e7a1d63b-7117-4423-8988-afcf12161878");
- * console.assert(e.toBraced() === "{e7a1d63b-7117-4423-8988-afcf12161878}");
- * console.assert(e.toUrn() === "urn:uuid:e7a1d63b-7117-4423-8988-afcf12161878");
+ * const d = Uuid25.parse("dpoadk8izg9y4tte7vy1xt94o");
+ * console.assert(d.toHex() === "e7a1d63b711744238988afcf12161878");
+ * console.assert(d.toHyphenated() === "e7a1d63b-7117-4423-8988-afcf12161878");
+ * console.assert(d.toBraced() === "{e7a1d63b-7117-4423-8988-afcf12161878}");
+ * console.assert(d.toUrn() === "urn:uuid:e7a1d63b-7117-4423-8988-afcf12161878");
  * ```
  */
 export class Uuid25 {

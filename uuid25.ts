@@ -281,7 +281,7 @@ export class Uuid25 {
   }
 
   /**
-   * Formats this type in the 8-4-4-4-12 hyphenated format:
+   * Formats `this` in the 8-4-4-4-12 hyphenated format:
    * `40eb9860-cf3e-45e2-a90e-b82236ac806c`.
    *
    * @category Conversion-to
@@ -303,7 +303,7 @@ export class Uuid25 {
   }
 
   /**
-   * Formats this type in the hyphenated format with surrounding braces:
+   * Formats `this` in the hyphenated format with surrounding braces:
    * `{40eb9860-cf3e-45e2-a90e-b82236ac806c}`.
    *
    * @category Conversion-to
@@ -313,7 +313,7 @@ export class Uuid25 {
   }
 
   /**
-   * Formats this type in the RFC 4122 URN format:
+   * Formats `this` in the RFC 4122 URN format:
    * `urn:uuid:40eb9860-cf3e-45e2-a90e-b82236ac806c`.
    *
    * @category Conversion-to

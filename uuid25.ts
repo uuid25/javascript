@@ -138,7 +138,6 @@ export class Uuid25 {
   }
 
   /**
-   *
    * Creates an instance from a UUID string representation.
    *
    * This method accepts the following formats:
@@ -335,7 +334,7 @@ const convertBase = (
     "invalid base"
   );
 
-  // determine the number of `src` digits to read for each outer loop.
+  // determine the number of `src` digits to read for each outer loop
   let wordLen = 1;
   let wordBase = srcBase;
   while (wordBase <= Number.MAX_SAFE_INTEGER / (srcBase * dstBase)) {
@@ -354,7 +353,7 @@ const convertBase = (
 
   let dstUsed = dstSize - 1; // storage to memorize range of `dst` filled
 
-  // read `word_len` digits from `src` for each outer loop
+  // read `wordLen` digits from `src` for each outer loop
   let wordHead = srcSize % wordLen;
   if (wordHead > 0) {
     wordHead -= wordLen;
@@ -387,7 +386,7 @@ const convertBase = (
 
 /** Converts from a string of digit characters to an array of digit values. */
 const decodeDigitValues = (digitChars: string, base: number): Uint8Array => {
-  // O(1) map from ASCII code points to Base36 digit values.
+  // O(1) map from ASCII code points to Base36 digit values
   const DECODE_MAP = [
     0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f,
     0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f,

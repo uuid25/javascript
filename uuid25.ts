@@ -133,7 +133,7 @@ export class Uuid25 {
    * @category Conversion-to
    */
   toBytes(): Uint8Array {
-    const src = decodeDigitValues(this.value, 36);
+    const src = decodeDigitChars(this.value, 36);
     return convertBase(src, 36, 256, 16);
   }
 
@@ -196,7 +196,7 @@ export class Uuid25 {
     if (uuidString === undefined) {
       throw newParseError();
     }
-    const src = decodeDigitValues(uuidString, 16);
+    const src = decodeDigitChars(uuidString, 16);
     return Uuid25.fromDigitValues(convertBase(src, 16, 36, 25));
   }
 
@@ -268,7 +268,7 @@ export class Uuid25 {
    * @category Conversion-to
    */
   toHex(): string {
-    const src = decodeDigitValues(this.value, 36);
+    const src = decodeDigitChars(this.value, 36);
     const digitValues = convertBase(src, 36, 16, 32);
     const digits = "0123456789abcdef";
     let buffer = "";
@@ -286,7 +286,7 @@ export class Uuid25 {
    * @category Conversion-to
    */
   toHyphenated(): string {
-    const src = decodeDigitValues(this.value, 36);
+    const src = decodeDigitChars(this.value, 36);
     const digitValues = convertBase(src, 36, 16, 32);
     const digits = "0123456789abcdef";
     let buffer = "";
@@ -385,7 +385,7 @@ const convertBase = (
 };
 
 /** Converts from a string of digit characters to an array of digit values. */
-const decodeDigitValues = (digitChars: string, base: number): Uint8Array => {
+const decodeDigitChars = (digitChars: string, base: number): Uint8Array => {
   // O(1) map from ASCII code points to Base36 digit values
   const DECODE_MAP = [
     0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f,

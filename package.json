@@ -1,16 +1,15 @@
 {
   "name": "uuid25",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "25-digit case-insensitive UUID encoding",
   "type": "module",
   "main": "uuid25.js",
   "types": "./uuid25.d.ts",
-  "exports": {
-    "default": "./uuid25.js"
-  },
+  "exports": "./uuid25.js",
   "files": [
     "uuid25.d.ts"
   ],
+  "sideEffects": false,
   "scripts": {
     "build": "tsc",
     "doc": "typedoc ./uuid25.ts --gitRevision \"v$npm_package_version\"",
@@ -32,8 +31,8 @@
   },
   "homepage": "https://github.com/uuid25/javascript#readme",
   "devDependencies": {
-    "mocha": "^10.1.0",
-    "typedoc": "^0.23.21",
-    "typescript": "^4.9.3"
+    "mocha": "^10.2.0",
+    "typedoc": "^0.23.25",
+    "typescript": "^4.9.5"
   }
 }

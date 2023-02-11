@@ -33,19 +33,19 @@ const newParseError = () => new SyntaxError("could not parse a UUID string");
  * console.assert(b.toBytes().every((x) => x === 0xff));
  *
  * // convert from/to other popular textual representations
- * const d = [
+ * const c = [
  *   Uuid25.parse("e7a1d63b711744238988afcf12161878"),
  *   Uuid25.parse("e7a1d63b-7117-4423-8988-afcf12161878"),
  *   Uuid25.parse("{e7a1d63b-7117-4423-8988-afcf12161878}"),
  *   Uuid25.parse("urn:uuid:e7a1d63b-7117-4423-8988-afcf12161878"),
  * ];
- * console.assert(d.every((x) => x.value === "dpoadk8izg9y4tte7vy1xt94o"));
+ * console.assert(c.every((x) => x.value === "dpoadk8izg9y4tte7vy1xt94o"));
  *
- * const e = Uuid25.parse("dpoadk8izg9y4tte7vy1xt94o");
- * console.assert(e.toHex() === "e7a1d63b711744238988afcf12161878");
- * console.assert(e.toHyphenated() === "e7a1d63b-7117-4423-8988-afcf12161878");
- * console.assert(e.toBraced() === "{e7a1d63b-7117-4423-8988-afcf12161878}");
- * console.assert(e.toUrn() === "urn:uuid:e7a1d63b-7117-4423-8988-afcf12161878");
+ * const d = Uuid25.parse("dpoadk8izg9y4tte7vy1xt94o");
+ * console.assert(d.toHex() === "e7a1d63b711744238988afcf12161878");
+ * console.assert(d.toHyphenated() === "e7a1d63b-7117-4423-8988-afcf12161878");
+ * console.assert(d.toBraced() === "{e7a1d63b-7117-4423-8988-afcf12161878}");
+ * console.assert(d.toUrn() === "urn:uuid:e7a1d63b-7117-4423-8988-afcf12161878");
  * ```
  */
 export class Uuid25 {
@@ -133,12 +133,11 @@ export class Uuid25 {
    * @category Conversion-to
    */
   toBytes(): Uint8Array {
-    const src = decodeDigitValues(this.value, 36);
+    const src = decodeDigitChars(this.value, 36);
     return convertBase(src, 36, 256, 16);
   }
 
   /**
-   *
    * Creates an instance from a UUID string representation.
    *
    * This method accepts the following formats:
@@ -197,7 +196,7 @@ export class Uuid25 {
     if (uuidString === undefined) {
       throw newParseError();
     }
-    const src = decodeDigitValues(uuidString, 16);
+    const src = decodeDigitChars(uuidString, 16);
     return Uuid25.fromDigitValues(convertBase(src, 16, 36, 25));
   }
 
@@ -269,7 +268,7 @@ export class Uuid25 {
    * @category Conversion-to
    */
   toHex(): string {
-    const src = decodeDigitValues(this.value, 36);
+    const src = decodeDigitChars(this.value, 36);
     const digitValues = convertBase(src, 36, 16, 32);
     const digits = "0123456789abcdef";
     let buffer = "";
@@ -281,13 +280,13 @@ export class Uuid25 {
   }
 
   /**
-   * Formats this type in the 8-4-4-4-12 hyphenated format:
+   * Formats `this` in the 8-4-4-4-12 hyphenated format:
    * `40eb9860-cf3e-45e2-a90e-b82236ac806c`.
    *
    * @category Conversion-to
    */
   toHyphenated(): string {
-    const src = decodeDigitValues(this.value, 36);
+    const src = decodeDigitChars(this.value, 36);
     const digitValues = convertBase(src, 36, 16, 32);
     const digits = "0123456789abcdef";
     let buffer = "";
@@ -303,7 +302,7 @@ export class Uuid25 {
   }
 
   /**
-   * Formats this type in the hyphenated format with surrounding braces:
+   * Formats `this` in the hyphenated format with surrounding braces:
    * `{40eb9860-cf3e-45e2-a90e-b82236ac806c}`.
    *
    * @category Conversion-to
@@ -313,7 +312,7 @@ export class Uuid25 {
   }
 
   /**
-   * Formats this type in the RFC 4122 URN format:
+   * Formats `this` in the RFC 4122 URN format:
    * `urn:uuid:40eb9860-cf3e-45e2-a90e-b82236ac806c`.
    *
    * @category Conversion-to
@@ -335,7 +334,7 @@ const convertBase = (
     "invalid base"
   );
 
-  // determine the number of `src` digits to read for each outer loop.
+  // determine the number of `src` digits to read for each outer loop
   let wordLen = 1;
   let wordBase = srcBase;
   while (wordBase <= Number.MAX_SAFE_INTEGER / (srcBase * dstBase)) {
@@ -354,7 +353,7 @@ const convertBase = (
 
   let dstUsed = dstSize - 1; // storage to memorize range of `dst` filled
 
-  // read `word_len` digits from `src` for each outer loop
+  // read `wordLen` digits from `src` for each outer loop
   let wordHead = srcSize % wordLen;
   if (wordHead > 0) {
     wordHead -= wordLen;
@@ -386,8 +385,8 @@ const convertBase = (
 };
 
 /** Converts from a string of digit characters to an array of digit values. */
-const decodeDigitValues = (digitChars: string, base: number): Uint8Array => {
-  // O(1) map from ASCII code points to Base36 digit values.
+const decodeDigitChars = (digitChars: string, base: number): Uint8Array => {
+  // O(1) map from ASCII code points to Base36 digit values
   const DECODE_MAP = [
     0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f,
     0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f, 0x7f,

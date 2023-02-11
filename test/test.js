@@ -87,6 +87,7 @@ describe("Uuid25", function () {
   it("writes other formats", function () {
     for (const e of TEST_CASES) {
       const x = Uuid25.parse(e.uuid25);
+      assert(String(x) === e.uuid25);
       assert(x.value === e.uuid25);
       assert(x.toHex() === e.hex);
       assert(x.toHyphenated() === e.hyphenated);

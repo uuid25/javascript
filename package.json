@@ -5,12 +5,11 @@
   "type": "module",
   "main": "uuid25.js",
   "types": "./uuid25.d.ts",
-  "exports": {
-    "default": "./uuid25.js"
-  },
+  "exports": "./uuid25.js",
   "files": [
     "uuid25.d.ts"
   ],
+  "sideEffects": false,
   "scripts": {
     "build": "tsc",
     "doc": "typedoc ./uuid25.ts --gitRevision \"v$npm_package_version\"",

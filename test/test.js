@@ -23,7 +23,7 @@ describe("Uuid25", function () {
     }
   });
 
-  it("converts to/from prepared bytes", function () {
+  it("converts from/to prepared bytes", function () {
     for (const e of TEST_CASES) {
       const x = Uuid25.parse(e.uuid25);
       assert(x.value === Uuid25.fromBytes(e.bytes).value);

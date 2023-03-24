@@ -13,7 +13,7 @@ const assert: (cond: boolean, msg: string) => asserts cond = (cond, msg) => {
 const newParseError = () => new SyntaxError("could not parse a UUID string");
 
 /**
- * Primary value type containing the Uuid25 representation of a UUID.
+ * The primary value type containing the Uuid25 representation of a UUID.
  *
  * This class wraps a string value to provide conversion methods from/to other
  * popular UUID textual representations.
@@ -273,7 +273,6 @@ export class Uuid25 {
     const digits = "0123456789abcdef";
     let buffer = "";
     for (const e of digitValues) {
-      assert(e < digits.length, "invalid digit value");
       buffer += digits.charAt(e);
     }
     return buffer;
@@ -286,19 +285,10 @@ export class Uuid25 {
    * @category Conversion-to
    */
   toHyphenated(): string {
-    const src = decodeDigitChars(this.value, 36);
-    const digitValues = convertBase(src, 36, 16, 32);
-    const digits = "0123456789abcdef";
-    let buffer = "";
-    for (let i = 0; i < 32; i++) {
-      if (i === 8 || i === 12 || i === 16 || i === 20) {
-        buffer += "-";
-      }
-      const e = digitValues[i];
-      assert(e < digits.length, "invalid digit value");
-      buffer += digits.charAt(e);
-    }
-    return buffer;
+    return /^([0-9a-f]{8})([0-9a-f]{4})([0-9a-f]{4})([0-9a-f]{4})([0-9a-f]{12})$/
+      .exec(this.toHex())!
+      .slice(1, 6)
+      .join("-");
   }
 
   /**

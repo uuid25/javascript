@@ -13,7 +13,7 @@ const assert: (cond: boolean, msg: string) => asserts cond = (cond, msg) => {
 const newParseError = () => new SyntaxError("could not parse a UUID string");
 
 /**
- * Primary value type containing the Uuid25 representation of a UUID.
+ * The primary value type containing the Uuid25 representation of a UUID.
  *
  * This class wraps a string value to provide conversion methods from/to other
  * popular UUID textual representations.

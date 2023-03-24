@@ -10,7 +10,7 @@ const assert = (cond, msg) => {
 };
 const newParseError = () => new SyntaxError("could not parse a UUID string");
 /**
- * Primary value type containing the Uuid25 representation of a UUID.
+ * The primary value type containing the Uuid25 representation of a UUID.
  *
  * This class wraps a string value to provide conversion methods from/to other
  * popular UUID textual representations.
@@ -45,7 +45,7 @@ const newParseError = () => new SyntaxError("could not parse a UUID string");
  * console.assert(d.toUrn() === "urn:uuid:e7a1d63b-7117-4423-8988-afcf12161878");
  * ```
  */
-export class Uuid25 {
+class Uuid25 {
     /**
      * Creates an instance from the inner string primitive.
      *
@@ -242,7 +242,6 @@ export class Uuid25 {
         const digits = "0123456789abcdef";
         let buffer = "";
         for (const e of digitValues) {
-            assert(e < digits.length, "invalid digit value");
             buffer += digits.charAt(e);
         }
         return buffer;
@@ -254,19 +253,10 @@ export class Uuid25 {
      * @category Conversion-to
      */
     toHyphenated() {
-        const src = decodeDigitChars(this.value, 36);
-        const digitValues = convertBase(src, 36, 16, 32);
-        const digits = "0123456789abcdef";
-        let buffer = "";
-        for (let i = 0; i < 32; i++) {
-            if (i === 8 || i === 12 || i === 16 || i === 20) {
-                buffer += "-";
-            }
-            const e = digitValues[i];
-            assert(e < digits.length, "invalid digit value");
-            buffer += digits.charAt(e);
-        }
-        return buffer;
+        return /^([0-9a-f]{8})([0-9a-f]{4})([0-9a-f]{4})([0-9a-f]{4})([0-9a-f]{12})$/
+            .exec(this.toHex())
+            .slice(1, 6)
+            .join("-");
     }
     /**
      * Formats `this` in the hyphenated format with surrounding braces:
@@ -292,6 +282,7 @@ export class Uuid25 {
  * representation.
  */
 Uuid25.MAX = "f5lxx1zz5pnorynqglhzmsp33";
+export { Uuid25 };
 /** Converts a digit value array in `srcBase` to that in `dstBase`. */
 const convertBase = (src, srcBase, dstBase, dstSize) => {
     assert(2 <= srcBase && srcBase <= 256 && 2 <= dstBase && dstBase <= 256, "invalid base");

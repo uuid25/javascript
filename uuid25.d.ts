@@ -4,7 +4,7 @@
  * @packageDocumentation
  */
 /**
- * Primary value type containing the Uuid25 representation of a UUID.
+ * The primary value type containing the Uuid25 representation of a UUID.
  *
  * This class wraps a string value to provide conversion methods from/to other
  * popular UUID textual representations.

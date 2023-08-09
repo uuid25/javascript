@@ -45,7 +45,7 @@ const newParseError = () => new SyntaxError("could not parse a UUID string");
  * console.assert(d.toUrn() === "urn:uuid:e7a1d63b-7117-4423-8988-afcf12161878");
  * ```
  */
-class Uuid25 {
+export class Uuid25 {
     /**
      * Creates an instance from the inner string primitive.
      *
@@ -202,7 +202,7 @@ class Uuid25 {
         return Uuid25.parseHexImpl(/^([0-9a-f]{8})-([0-9a-f]{4})-([0-9a-f]{4})-([0-9a-f]{4})-([0-9a-f]{12})$/i
             .exec(uuidString)
             ?.slice(1, 6)
-            ?.join(""));
+            .join(""));
     }
     /**
      * Creates an instance from the hyphenated format with surrounding braces:
@@ -215,7 +215,7 @@ class Uuid25 {
         return Uuid25.parseHexImpl(/^\{([0-9a-f]{8})-([0-9a-f]{4})-([0-9a-f]{4})-([0-9a-f]{4})-([0-9a-f]{12})\}$/i
             .exec(uuidString)
             ?.slice(1, 6)
-            ?.join(""));
+            .join(""));
     }
     /**
      * Creates an instance from the RFC 4122 URN format:
@@ -228,7 +228,7 @@ class Uuid25 {
         return Uuid25.parseHexImpl(/^urn:uuid:([0-9a-f]{8})-([0-9a-f]{4})-([0-9a-f]{4})-([0-9a-f]{4})-([0-9a-f]{12})$/i
             .exec(uuidString)
             ?.slice(1, 6)
-            ?.join(""));
+            .join(""));
     }
     /**
      * Formats `this` in the 32-digit hexadecimal format without hyphens:
@@ -282,7 +282,6 @@ class Uuid25 {
  * representation.
  */
 Uuid25.MAX = "f5lxx1zz5pnorynqglhzmsp33";
-export { Uuid25 };
 /** Converts a digit value array in `srcBase` to that in `dstBase`. */
 const convertBase = (src, srcBase, dstBase, dstSize) => {
     assert(2 <= srcBase && srcBase <= 256 && 2 <= dstBase && dstBase <= 256, "invalid base");

@@ -209,7 +209,7 @@ export class Uuid25 {
    */
   static parseHex(uuidString: string): Uuid25 {
     return Uuid25.parseHexImpl(
-      /^[0-9a-f]{32}$/i.test(uuidString) ? uuidString : undefined
+      /^[0-9a-f]{32}$/i.test(uuidString) ? uuidString : undefined,
     );
   }
 
@@ -225,7 +225,7 @@ export class Uuid25 {
       /^([0-9a-f]{8})-([0-9a-f]{4})-([0-9a-f]{4})-([0-9a-f]{4})-([0-9a-f]{12})$/i
         .exec(uuidString)
         ?.slice(1, 6)
-        ?.join("")
+        .join(""),
     );
   }
 
@@ -241,7 +241,7 @@ export class Uuid25 {
       /^\{([0-9a-f]{8})-([0-9a-f]{4})-([0-9a-f]{4})-([0-9a-f]{4})-([0-9a-f]{12})\}$/i
         .exec(uuidString)
         ?.slice(1, 6)
-        ?.join("")
+        .join(""),
     );
   }
 
@@ -257,7 +257,7 @@ export class Uuid25 {
       /^urn:uuid:([0-9a-f]{8})-([0-9a-f]{4})-([0-9a-f]{4})-([0-9a-f]{4})-([0-9a-f]{12})$/i
         .exec(uuidString)
         ?.slice(1, 6)
-        ?.join("")
+        .join(""),
     );
   }
 
@@ -317,11 +317,11 @@ const convertBase = (
   src: Uint8Array,
   srcBase: number,
   dstBase: number,
-  dstSize: number
+  dstSize: number,
 ): Uint8Array => {
   assert(
     2 <= srcBase && srcBase <= 256 && 2 <= dstBase && dstBase <= 256,
-    "invalid base"
+    "invalid base",
   );
 
   // determine the number of `src` digits to read for each outer loop

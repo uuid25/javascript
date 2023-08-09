@@ -225,7 +225,7 @@ export class Uuid25 {
       /^([0-9a-f]{8})-([0-9a-f]{4})-([0-9a-f]{4})-([0-9a-f]{4})-([0-9a-f]{12})$/i
         .exec(uuidString)
         ?.slice(1, 6)
-        ?.join(""),
+        .join(""),
     );
   }
 
@@ -241,7 +241,7 @@ export class Uuid25 {
       /^\{([0-9a-f]{8})-([0-9a-f]{4})-([0-9a-f]{4})-([0-9a-f]{4})-([0-9a-f]{12})\}$/i
         .exec(uuidString)
         ?.slice(1, 6)
-        ?.join(""),
+        .join(""),
     );
   }
 
@@ -257,7 +257,7 @@ export class Uuid25 {
       /^urn:uuid:([0-9a-f]{8})-([0-9a-f]{4})-([0-9a-f]{4})-([0-9a-f]{4})-([0-9a-f]{12})$/i
         .exec(uuidString)
         ?.slice(1, 6)
-        ?.join(""),
+        .join(""),
     );
   }
 

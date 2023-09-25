@@ -1,4 +1,4 @@
-import { Uuid25 } from "uuid25";
+import { Uuid25 } from "../uuid25.js";
 
 describe("Uuid25", function () {
   it("implements equals()", function () {

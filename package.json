@@ -5,14 +5,19 @@
   "type": "module",
   "main": "uuid25.js",
   "types": "./uuid25.d.ts",
-  "exports": "./uuid25.js",
+  "exports": {
+    "require": "./cjs/uuid25.cjs",
+    "default": "./uuid25.js"
+  },
   "files": [
+    "cjs/uuid25.cjs",
     "uuid25.d.ts"
   ],
   "sideEffects": false,
   "scripts": {
     "build": "tsc",
     "doc": "typedoc ./uuid25.ts --gitRevision \"v$npm_package_version\"",
+    "postbuild": "rm -rf ./cjs/*.d.cts",
     "predoc": "rm -rf ./docs",
     "prepare": "npm run build && npm run doc && npm run test",
     "test": "mocha"

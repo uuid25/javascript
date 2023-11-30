@@ -37,6 +37,12 @@ console.assert(d.toBraced() === "{e7a1d63b-7117-4423-8988-afcf12161878}");
 console.assert(d.toUrn() === "urn:uuid:e7a1d63b-7117-4423-8988-afcf12161878");
 ```
 
+## CommonJS support
+
+The CommonJS entry point is deprecated and provided for backward compatibility
+purposes only. The entry point is no longer tested and will be removed in the
+future.
+
 ## License
 
 Licensed under the Apache License, Version 2.0.
